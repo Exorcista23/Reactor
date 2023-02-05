@@ -102,6 +102,7 @@ final class FluxHandle<T, R> extends InternalFluxOperator<T, R> {
 		@Override
 		public void onNext(T t) {
 			if (done) {
+				Operators.onDiscard(t, actual.currentContext());
 				Operators.onNextDropped(t, actual.currentContext());
 				return;
 			}
@@ -155,6 +156,7 @@ final class FluxHandle<T, R> extends InternalFluxOperator<T, R> {
 		@Override
 		public boolean tryOnNext(T t) {
 			if (done) {
+				Operators.onDiscard(t, actual.currentContext());
 				Operators.onNextDropped(t, actual.currentContext());
 				return false;
 			}
@@ -316,6 +318,7 @@ final class FluxHandle<T, R> extends InternalFluxOperator<T, R> {
 		@Override
 		public void onNext(T t) {
 			if (done) {
+				Operators.onDiscard(t, actual.currentContext());
 				Operators.onNextDropped(t, actual.currentContext());
 				return;
 			}
@@ -370,6 +373,7 @@ final class FluxHandle<T, R> extends InternalFluxOperator<T, R> {
 		@Override
 		public boolean tryOnNext(T t) {
 			if (done) {
+				Operators.onDiscard(t, actual.currentContext());
 				Operators.onNextDropped(t, actual.currentContext());
 				return false;
 			}

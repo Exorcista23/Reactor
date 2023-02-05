@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ * Copyright (c) 2018-2022 VMware Inc. or its affiliates, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,6 +108,7 @@ final class FluxMetricsFuseable<T> extends InternalFluxOperator<T, T> implements
 
 			if (done) {
 				recordMalformed(sequenceName, commonTags, registry);
+				Operators.onDiscard(t, actual.currentContext());
 				Operators.onNextDropped(t, actual.currentContext());
 				return;
 			}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ * Copyright (c) 2016-2022 VMware Inc. or its affiliates, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -263,6 +263,7 @@ class NextProcessor<O> extends MonoProcessor<O> {
 					Operators.onDiscard(value, currentContext());
 					return;
 				case FAIL_TERMINATED:
+					Operators.onDiscard(value, currentContext());
 					Operators.onNextDropped(value, currentContext());
 					return;
 				case FAIL_NON_SERIALIZED:

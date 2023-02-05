@@ -157,12 +157,14 @@ final class MonoCreate<T> extends Mono<T> implements SourceProducer<T> {
 				return;
 			}
 			else if (d == TERMINATED) {
+				Operators.onDiscard(value, actual.currentContext());
 				Operators.onNextDropped(value, actual.currentContext());
 				return;
 			}
 			for (; ; ) {
 				int s = state;
 				if (s == HAS_REQUEST_HAS_VALUE || s == NO_REQUEST_HAS_VALUE) {
+					Operators.onDiscard(value, actual.currentContext());
 					Operators.onNextDropped(value, actual.currentContext());
 					return;
 				}
@@ -179,6 +181,7 @@ final class MonoCreate<T> extends Mono<T> implements SourceProducer<T> {
 							disposeResource(false);
 						}
 					} else {
+						Operators.onDiscard(value, actual.currentContext());
 						Operators.onNextDropped(value, actual.currentContext());
 					}
 					return;

@@ -108,6 +108,7 @@ final class MonoCollect<T, R> extends MonoFromFluxOperator<T, R>
 		@Override
 		public void onNext(T t) {
 			if (done) {
+				Operators.onDiscard(t, actual.currentContext());
 				Operators.onNextDropped(t, actual.currentContext());
 				return;
 			}

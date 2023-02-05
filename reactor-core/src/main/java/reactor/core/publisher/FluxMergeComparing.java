@@ -433,6 +433,7 @@ final class FluxMergeComparing<T> extends Flux<T> implements SourceProducer<T> {
 		@Override
 		public void onNext(T item) {
 			if (parent.done || done) {
+				Operators.onDiscard(item, actual().currentContext());
 				Operators.onNextDropped(item, actual().currentContext());
 				return;
 			}

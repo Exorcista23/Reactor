@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ * Copyright (c) 2016-2022 VMware Inc. or its affiliates, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -134,7 +134,9 @@ final class FluxBuffer<T, C extends Collection<? super T>> extends InternalFluxO
 		@Override
 		public void onNext(T t) {
 			if (done) {
-				Operators.onNextDropped(t, actual.currentContext());
+				Context ctx = actual.currentContext();
+				Operators.onDiscard(t, ctx);
+				Operators.onNextDropped(t, ctx);
 				return;
 			}
 
@@ -283,7 +285,9 @@ final class FluxBuffer<T, C extends Collection<? super T>> extends InternalFluxO
 		@Override
 		public void onNext(T t) {
 			if (done) {
-				Operators.onNextDropped(t, this.ctx);
+				Context ctx = this.ctx;
+				Operators.onDiscard(t, ctx);
+				Operators.onNextDropped(t, ctx);
 				return;
 			}
 
@@ -473,7 +477,9 @@ final class FluxBuffer<T, C extends Collection<? super T>> extends InternalFluxO
 		@Override
 		public void onNext(T t) {
 			if (done) {
-				Operators.onNextDropped(t, actual.currentContext());
+				Context ctx = actual.currentContext();
+				Operators.onDiscard(t, ctx);
+				Operators.onNextDropped(t, ctx);
 				return;
 			}
 

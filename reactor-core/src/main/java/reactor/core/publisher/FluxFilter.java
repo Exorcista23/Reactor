@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ * Copyright (c) 2016-2022 VMware Inc. or its affiliates, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,6 +89,7 @@ final class FluxFilter<T> extends InternalFluxOperator<T, T> {
 		@Override
 		public void onNext(T t) {
 			if (done) {
+				Operators.onDiscard(t, this.ctx);
 				Operators.onNextDropped(t,  this.ctx);
 				return;
 			}
@@ -121,6 +122,7 @@ final class FluxFilter<T> extends InternalFluxOperator<T, T> {
 		@Override
 		public boolean tryOnNext(T t) {
 			if (done) {
+				Operators.onDiscard(t, this.ctx);
 				Operators.onNextDropped(t,  this.ctx);
 				return false;
 			}
@@ -223,6 +225,7 @@ final class FluxFilter<T> extends InternalFluxOperator<T, T> {
 		@Override
 		public void onNext(T t) {
 			if (done) {
+				Operators.onDiscard(t, this.ctx);
 				Operators.onNextDropped(t,  this.ctx);
 				return;
 			}
@@ -255,6 +258,7 @@ final class FluxFilter<T> extends InternalFluxOperator<T, T> {
 		@Override
 		public boolean tryOnNext(T t) {
 			if (done) {
+				Operators.onDiscard(t, this.ctx);
 				Operators.onNextDropped(t,  this.ctx);
 				return false;
 			}

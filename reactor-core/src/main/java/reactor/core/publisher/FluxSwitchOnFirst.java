@@ -504,6 +504,7 @@ final class FluxSwitchOnFirst<T, R> extends InternalFluxOperator<T, R> {
 		@Override
 		public final void onNext(T t) {
 			if (this.done) {
+				Operators.onDiscard(t, currentContext());
 				Operators.onNextDropped(t, currentContext());
 				return;
 			}
@@ -829,6 +830,7 @@ final class FluxSwitchOnFirst<T, R> extends InternalFluxOperator<T, R> {
 		@SuppressWarnings("unchecked")
 		public boolean tryOnNext(T t) {
 			if (this.done) {
+				Operators.onDiscard(t, currentContext());
 				Operators.onNextDropped(t, currentContext());
 				return false;
 			}
@@ -924,6 +926,7 @@ final class FluxSwitchOnFirst<T, R> extends InternalFluxOperator<T, R> {
 		@Override
 		public final void onNext(T t) {
 			if (this.done) {
+				Operators.onDiscard(t, currentContext());
 				Operators.onNextDropped(t, currentContext());
 				return;
 			}
@@ -1033,6 +1036,7 @@ final class FluxSwitchOnFirst<T, R> extends InternalFluxOperator<T, R> {
 		@Override
 		public boolean tryOnNext(T t) {
 			if (this.done) {
+				Operators.onDiscard(t, currentContext());
 				Operators.onNextDropped(t, currentContext());
 				return true;
 			}
